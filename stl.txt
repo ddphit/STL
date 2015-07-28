@@ -1,0 +1,37 @@
+STL标准模板库：
+它涵盖了常用的数据结构和算法。它的基本观念是把数据和操作分离。
+STL中数据由容器类别加以管理，操作则由可定制的算法来完成。迭代器在容器和算法之间充当黏合剂，使得任何算法都可以和任何容器进行交互运作。
+STL的底层机制都是以RB-tree(红黑树)完成的。RB-tree也是一个独立容器，但不供外界使用。
+STL含有容器、算法、迭代器组件。
+STL序列容器：vector，string， deque，list。
+STL关联容器：set, multiset, map, multimap.
+STL适配容器：stack, queue, priority_queue.
+关联容器是键值对。
+1. vector:支持随机访问，内部使用动态数组的方式实现，并且可以使用下标访问元素（因为重载了[]运算符）。erase()函数调用后，被删除元素之后的内容会自动往前移。它拥有一段连续的内存空间。
+2. list：采用双向链表实现，通过指针对数据进行访问。erase()函数调用后，会释放链表的节点内存，可以通过erase函数的返回值获得原来链表的下一个元素。
+如：
+it=list.erase(it);获得被删除元素的下一个位置。
+3. deque:双向队列容器，表面上与vector类似，比vector增加了push_front()和pop_front()两个函数，可以对首部进行操作。采用动态数组的方式实现。不存在capacity()函数和reserve()函数。capacity()获得vector的容量，reserve()设置vector的容量。
+
+关联容器：insert()插入元素函数。
+set:key.key是唯一的。
+map:键值对key-value.key是唯一的。
+map和hashmap的区别：
+1. 底层数据结构不同，map是红黑树，hashmap是哈希表。
+2. map的优点在于元素可以自动按照键值排序，而hashmap的优点在于它的各项操作的平均时间复杂度接近常数。
+3. map属于标准的一部分，而hashmap不是。
+
+STL智能指针:auto_prt--可以进行类似指针的操作。
+它能保证当异常掷出时，分配的对象能被自动销毁，内存能被自动释放。
+如   auto_ptr<int> ptr(new char[10]);
+它是通过一个引用计数变量来控制内存释放的时间。当引用计数为0时，释放内存。
+
+函数对象就是一个重载了“（）”运算符的类的对象，可以像一个函数一样使用。
+如
+class Myadd{
+	public:
+		int operator ()(int a, int b){return a+b;}
+};
+Myadd a;
+int num=a(3,8);//num为11
+
